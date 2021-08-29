@@ -39,13 +39,13 @@ public class Record {
 		String strSpeaking = String.format("%3d", speaking);
 		String strWriting = String.format("%3d", writing);
 		String strTotal = String.format("%3d", total);
-		String strAverage = String.format("%2.1f", average);
+		String strAverage = String.format("%4.1f", average);
 		String strGrade = String.format("%s", grade);
 		String strModifyType = String.format("%-4s", modifyType);
 		String strModifyTime = String.format("%20s", modifyTime);
 		
 		return id + "   " + name + "   " + strReading + "   " + strListening + "   " + strSpeaking + "   " + strWriting + "   " + 
-		       strTotal + "   " + strAverage + "\t" + strGrade + "     " + strModifyType + "\t" + strModifyTime + "    " + modifyUser;
+		       strTotal + "   " + strAverage + " \t" + strGrade + "     " + strModifyType + "\t" + strModifyTime + "    " + modifyUser;
 	}
 	
 }

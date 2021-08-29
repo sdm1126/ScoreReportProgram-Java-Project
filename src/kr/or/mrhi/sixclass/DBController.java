@@ -20,13 +20,6 @@ public class DBController {
 		
 		try {
 			connection = DBUtility.getConnection();
-			
-			if (connection != null) {
-				System.out.println("데이터베이스에 연결되었습니다.");
-			} else {
-				System.out.println("데이터베이스에 연결되지 않았습니다.");
-			}
-			
 			preparedStatement = connection.prepareStatement(createQuery);
 			preparedStatement.setString(1, score.getId());
 			preparedStatement.setString(2, score.getName());
@@ -78,13 +71,6 @@ public class DBController {
 		
 		try {
 			connection = DBUtility.getConnection();
-			
-			if (connection != null) {
-				System.out.println("데이터베이스에 연결되었습니다.");
-			} else {
-				System.out.println("데이터베이스에 연결되지 않았습니다.");
-			}
-			
 			preparedStatement = connection.prepareStatement(readQuery);
 			columnData = "%" + columnData + "%";
 			preparedStatement.setString(1, columnData);
@@ -152,14 +138,7 @@ public class DBController {
 		}
 		
 		try {
-			connection = DBUtility.getConnection();
-			
-			if (connection != null) {
-				System.out.println("데이터베이스에 연결되었습니다.");
-			} else {
-				System.out.println("데이터베이스에 연결되지 않았습니다.");
-			}
-			
+			connection = DBUtility.getConnection();			
 			preparedStatement = connection.prepareStatement(listQuery);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -215,14 +194,7 @@ public class DBController {
 		String updateQuery = "CALL procedure_update_scoreTBL(?, ?, ?)";
 			
 		try {
-			connection = DBUtility.getConnection();
-			
-			if (connection != null) {
-				System.out.println("데이터베이스에 연결되었습니다.");
-			} else {
-				System.out.println("데이터베이스에 연결되지 않았습니다.");
-			}
-			
+			connection = DBUtility.getConnection();			
 			preparedStatement = connection.prepareStatement(updateQuery);
 			preparedStatement.setString(1, id);
 			preparedStatement.setString(2, columnNumber);
@@ -324,13 +296,6 @@ public class DBController {
 		
 		try {
 			connection = DBUtility.getConnection();
-			
-			if (connection != null) {
-				System.out.println("데이터베이스에 연결되었습니다.");
-			} else {
-				System.out.println("데이터베이스에 연결되지 않았습니다.");
-			}
-			
 			preparedStatement = connection.prepareStatement(recordQuery);
 			resultSet = preparedStatement.executeQuery();
 			

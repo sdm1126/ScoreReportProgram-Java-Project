@@ -127,10 +127,10 @@ public class Main {
 		String name = null;
 		
 		while(!flag) {
-			System.out.print("¿Ã∏ß ¿‘∑¬(«—±€, 15¿⁄ ¿Ã≥ª)> ");
+			System.out.print("¿Ã∏ß ¿‘∑¬(«—±€, 2~15¿⁄)> ");
 			name = scanner.nextLine();
 			
-			if(!name.matches("^[∞°-∆R]*$") || name.length() < 2 || name.length() > 15) {
+			if(!name.matches("^[∞°-∆R]{2,15}$")) {
 				System.out.println("¿ﬂ∏¯µ» ¿‘∑¬¿‘¥œ¥Ÿ.");
 				continue;
 			}
@@ -288,6 +288,8 @@ public class Main {
 			
 			switch(selectNumber) {
 				case ID:
+					columnNumber = "1";
+					
 					System.out.print("ID ¿‘∑¬(º˝¿⁄, 8¿⁄∏Æ)> ");
 					columnData = scanner.nextLine();
 					
@@ -296,21 +298,19 @@ public class Main {
 						continue;
 					}
 					
-					columnNumber = "1";
-					
 					list = readData(columnNumber, columnData);
 					break;
 					
 				case NAME:
-					System.out.print("¿Ã∏ß ¿‘∑¬(«—±€, 15¿⁄ ¿Ã≥ª)> ");
+					columnNumber = "2";
+					
+					System.out.print("¿Ã∏ß ¿‘∑¬(«—±€, 2~15¿⁄)> ");
 					columnData = scanner.nextLine();
 					
-					if(!columnData.matches("^[∞°-∆R]*$") || columnData.length() < 2 || columnData.length() > 15) {
+					if(!columnData.matches("^[∞°-∆R]{2,15}$")) {
 						System.out.println("¿ﬂ∏¯µ» ¿‘∑¬¿‘¥œ¥Ÿ.");
 						continue;
 					}
-					
-					columnNumber = "2";
 
 					list = readData(columnNumber, columnData);
 					break;
@@ -332,17 +332,20 @@ public class Main {
 		List<Score> list = new ArrayList<>();
 		list = DBController.readScoreTBL(columnNumber, columnData);
 		
+		if(list.size() <= 0) {
+			System.out.println("µ•¿Ã≈Õ∞° ¡∏¿Á«œ¡ˆ æ Ω¿¥œ¥Ÿ.");
+			return list;
+		}
+		
 		System.out.println("------------------------------------------------------------ ");
-		System.out.println("ID\t   ¿Ã∏ß\t   ¿–±‚\t µË±‚   ∏ª«œ±‚  æ≤±‚\t  «’∞Ë\t∆Ú±’\tµÓ±ﬁ  ");
+		System.out.println("         <          º∫  ¿˚  ∞¸  ∏Æ  Ω√  Ω∫  ≈€          >         ");
+		System.out.println("------------------------------------------------------------ ");
+		System.out.println("ID\t   ¿Ã∏ß\t   ¿–±‚\t µË±‚   ∏ª«œ±‚  æ≤±‚\t   «’∞Ë\t∆Ú±’\tµÓ±ﬁ  ");
 		System.out.println("------------------------------------------------------------ ");
 		for(Score score : list) {
 			System.out.println(score.toString());
 		}
 		System.out.println("------------------------------------------------------------ ");
-		
-		if(list.size() <= 0) {
-			System.out.println("µ•¿Ã≈Õ∞° ¡∏¿Á«œ¡ˆ æ Ω¿¥œ¥Ÿ.");
-		}
 
 		return list;
 	}
@@ -404,9 +407,11 @@ public class Main {
 			list = DBController.listScoreTBL(columnNumber);
 			flag = true;
 		}
-			
+		
 		System.out.println("------------------------------------------------------------ ");
-		System.out.println("ID\t   ¿Ã∏ß\t   ¿–±‚\t µË±‚   ∏ª«œ±‚  æ≤±‚\t  «’∞Ë\t∆Ú±’\tµÓ±ﬁ  ");
+		System.out.println("         <          º∫  ¿˚  ∞¸  ∏Æ  Ω√  Ω∫  ≈€          >         ");
+		System.out.println("------------------------------------------------------------ ");
+		System.out.println("ID\t   ¿Ã∏ß\t   ¿–±‚\t µË±‚   ∏ª«œ±‚  æ≤±‚\t   «’∞Ë\t∆Ú±’\tµÓ±ﬁ  ");
 		System.out.println("------------------------------------------------------------ ");
 		for(Score score : list) {
 			System.out.println(score.toString());
@@ -450,7 +455,6 @@ public class Main {
 		final String NAME = "1", READING = "2", LISTENING = "3", SPEAKING = "4", WRITING = "5", QUIT = "6";
 		
 		String columnNumber = null;
-		String columnData = null;
 		int count = 0;
 		
 		System.out.print("ºˆ¡§«“ ID ¿‘∑¬(º˝¿⁄, 8¿⁄∏Æ)> ");
@@ -476,6 +480,7 @@ public class Main {
 			switch(selectNumber) {
 				case NAME:
 					columnNumber = "1";
+					
 					String name = createName();
 					count = DBController.updateScoreTBL(id, columnNumber, name);
 					
@@ -489,6 +494,7 @@ public class Main {
 				
 				case READING:
 					columnNumber = "2";
+					
 					int reading = createReading();
 					count = DBController.updateScoreTBL(id, columnNumber, String.valueOf(reading));
 					
@@ -502,6 +508,7 @@ public class Main {
 				
 				case LISTENING:
 					columnNumber = "3";
+					
 					int listening = createListening();					
 					count = DBController.updateScoreTBL(id, columnNumber, String.valueOf(listening));
 					
@@ -515,6 +522,7 @@ public class Main {
 				
 				case SPEAKING:
 					columnNumber = "4";
+					
 					int speaking = createSpeaking();
 					count = DBController.updateScoreTBL(id, columnNumber, String.valueOf(speaking));
 					
@@ -528,6 +536,7 @@ public class Main {
 					
 				case WRITING:
 					columnNumber = "5";
+					
 					int write = createWriting();
 					count = DBController.updateScoreTBL(id, columnNumber, String.valueOf(write));
 					
@@ -559,6 +568,7 @@ public class Main {
 		
 		if(!id.matches("\\d{8}")) {
 			System.out.println("¿ﬂ∏¯µ» ¿‘∑¬¿‘¥œ¥Ÿ.");
+			return;
 		}
 		
 		boolean result = DBController.deleteScoreTBL(id);
@@ -577,18 +587,20 @@ public class Main {
 		List<Record> list = new ArrayList<>();
 		list = DBController.recordScoreTBL();
 		
+		if(list.size() <= 0) {
+			System.out.println("µ•¿Ã≈Õ∞° ¡∏¿Á«œ¡ˆ æ Ω¿¥œ¥Ÿ.");
+			return;
+		}
+		
 		System.out.println("---------------------------------------------------------------------------------------------------------------- ");
-		System.out.println("ID\t   ¿Ã∏ß\t   ¿–±‚\t µË±‚   ∏ª«œ±‚  æ≤±‚\t  «’∞Ë\t∆Ú±’\tµÓ±ﬁ   ≥ªøÎ\t Ω√∞£\t\t\t¥„¥Á¿⁄ ");
+		System.out.println("                                   <          º∫  ¿˚  ∞¸  ∏Æ  Ω√  Ω∫  ≈€          >                                   ");
+		System.out.println("---------------------------------------------------------------------------------------------------------------- ");
+		System.out.println("ID\t   ¿Ã∏ß\t   ¿–±‚\t µË±‚   ∏ª«œ±‚  æ≤±‚\t   «’∞Ë\t∆Ú±’\tµÓ±ﬁ   ≥ªøÎ\t Ω√∞£\t\t\t¥„¥Á¿⁄ ");
 		System.out.println("---------------------------------------------------------------------------------------------------------------- ");
 		for(Record record : list) {
 			System.out.println(record.toString());
 		}
 		System.out.println("---------------------------------------------------------------------------------------------------------------- ");
-		
-		if(list.size() <= 0) {
-			System.out.println("µ•¿Ã≈Õ∞° ¡∏¿Á«œ¡ˆ æ Ω¿¥œ¥Ÿ.");
-			return;
-		}
 		
 	}
 

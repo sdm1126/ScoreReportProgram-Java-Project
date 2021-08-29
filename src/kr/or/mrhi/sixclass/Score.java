@@ -86,15 +86,11 @@ public class Score {
 		String strSpeaking = String.format("%3d", speaking);
 		String strWriting = String.format("%3d", writing);
 		String strTotal = String.format("%3d", total);
-<<<<<<< HEAD
-		String strAverage = String.format("%3.1f", average);
-=======
-		String strAverage = String.format("%2.1f", average);
->>>>>>> d5abbae91538a8807b1960673ffcd7f810623d89
+		String strAverage = String.format("%4.1f", average);
 		String strGrade = String.format("%s", grade);
 		
 		return id + "   " + name + "   " + strReading + "   " + strListening + "   " + strSpeaking + "   " + strWriting + "   " + 
-	           strTotal + "   " + strAverage + "\t" + strGrade;
+	           strTotal + "   " + strAverage + " \t" + strGrade;
 	}
 	
 }
